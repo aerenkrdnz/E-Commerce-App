@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ValidDirective } from '../directives/valid.directive';
 
 
 
@@ -10,12 +11,14 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ValidDirective
   ],
   exports:[
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ValidDirective
   ]
 })
 export class SharedModule { }

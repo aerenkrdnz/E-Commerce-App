@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
+import { CommonModule } from "@angular/common";
+import { Component, Input } from "@angular/core";
+
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [SharedModule],
+  imports: [CommonModule],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.css'
+  styleUrls: ['./table.component.css']
 })
 export class TableComponent {
- @Input() heads: string[] = [];
+@Input() heads: string[] = [];
 }

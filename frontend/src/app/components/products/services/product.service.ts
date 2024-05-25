@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
-import { GenericHttpService } from '../../../common/services/generic-http.service';
-import { MessageResponseModel } from '../../../common/models/message.response.model';
-import { PaginationResultModel } from '../../../common/models/pagination.result.model';
-import { ProductModel } from './models/product.model';
+import { Injectable } from "@angular/core";
+import { MessageResponseModel } from "../../../common/models/message.response.model";
+import { PaginationResultModel } from "../../../common/models/pagination.result.model";
+import { RequestModel } from "../../../common/models/request.model";
+import { GenericHttpService } from "../../../common/services/generic-http.service";
+import { ProductModel } from "../models/product.model";
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,7 @@ export class ProductService {
     this._http.post<MessageResponseModel>("products/update", model, res=> callBack(res));
   }
 
-  getAll(model: RequestMode, callBack: (res: PaginationResultModel<ProductModel[]>)=>void){
+  getAll(model: RequestModel, callBack: (res: PaginationResultModel<ProductModel[]>)=>void){
     this._http.post<PaginationResultModel<ProductModel[]>>("products/", model, res=> callBack(res));
   }
 

@@ -11,6 +11,6 @@ const productSchema = new mongoose.Schema({
     categories: [{type:String, ref:"Category"}]
 });
 
-const Prdocut = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

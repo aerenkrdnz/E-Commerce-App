@@ -34,9 +34,9 @@ router.post("/removeById", async (req, res) => {
 
         const product = await Product.findById(_id);
         for (const image of product.imageUrls) {
-            fs.unlink(image.pathü, () => { });
+            fs.unlink(image.path, () => { });
         }
-        await Product.findByIdAndDetelete(_id);
+        await Product.findByIdAndDelete(_id);
         res.json({ message: "Ürün kaydı başarıyla silindi!" });
     })
 });
@@ -101,7 +101,7 @@ router.post("/getById", async (req, res) => {
 });
 
 //Ürün Güncelleme
-router.post("/update", upload.array(images), async (req, res) => {
+router.post("/update", upload.array("images"), async (req, res) => {
     response(res, async () => {
         const { _id, name, stock, price, categories } = req.body;
 

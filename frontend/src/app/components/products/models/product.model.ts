@@ -1,4 +1,4 @@
-import { CategoryModel } from "../../../categories/models/category.model";
+import { CategoryModel } from "../../categories/models/category.model";
 
 export class ProductModel {
     _id: string = "";
@@ -8,5 +8,5 @@ export class ProductModel {
     price: number = 0;
     isActive: boolean = true;
     createdDate: string = "";
-    imageUrl: any[] = [];
+    imageUrls: any[] = [];
 }

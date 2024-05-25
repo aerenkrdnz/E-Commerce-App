@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ValidDirective } from '../directives/valid.directive';
-import { BlankComponent } from '../components/blank/blank.component';
-import { TableComponent } from '../components/table/table.component';
-
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { BlankComponent } from "../components/blank/blank.component";
+import { TableComponent } from "../components/table/table.component";
+import { ValidDirective } from "../directives/valid.directive";
 
 
 @NgModule({
@@ -24,7 +23,7 @@ import { TableComponent } from '../components/table/table.component';
     RouterModule,
     ValidDirective,
     BlankComponent,
-    TableComponent
+    TableComponent,
   ]
 })
 export class SharedModule { }

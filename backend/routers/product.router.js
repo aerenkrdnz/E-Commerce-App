@@ -81,13 +81,13 @@ router.post("/", async (req, res) => {
 });
 
 //Ürün Aktif Pasif Durumunu Değiştirme
-router.post("/changeActiveStatus", async(req,res) =>{
-    response(res, async()=>{
-        const {_id} = req.body;
+router.post("/changeActiveStatus", async (req, res) => {
+    response(res, async () => {
+        const { _id } = req.body;
         let product = await Product.findById(_id);
         product.isActive = !product.isActive;
-        await Product.findByIdAndUpdate(_id,product);
-        res.json({message: "Ürünün durumu başarıyla değiştirildi."});
+        await Product.findByIdAndUpdate(_id, product);
+        res.json({ message: "Ürünün durumu başarıyla değiştirildi." });
     });
 });
 
@@ -106,9 +106,9 @@ router.post("/update", upload.array("images"), async (req, res) => {
         const { _id, name, stock, price, categories } = req.body;
 
         let product = await Product.findById(_id);
-        for (const image of product.imageUrls) {
-            fs.unlink(image.path, () => { });
-        }
+        // for (const image of product.imageUrls) {
+        //     fs.unlink(image.path, () => { });
+        // }
 
         let imageUrls;
         imageUrls = [...product.imageUrls, ...req.files]
@@ -117,7 +117,7 @@ router.post("/update", upload.array("images"), async (req, res) => {
             stock: stock,
             price: price,
             imageUrls: imageUrls,
-            categories: categories
+            categories: categories,
         };
         await Product.findByIdAndUpdate(_id, product);
         res.json({ message: "Ürün kaydı başarıyla güncellendi." });
@@ -142,5 +142,38 @@ router.post("/removeImageByProductIdAndIndex", async (req, res) => {
         }
     });
 });
+
+// Ana sayfa için ürün listesini getir
+router.post("/getAllForHomePage", async(req, res) => {
+    response(res, async () => {
+        const {pageNumber, pageSize, search, categoryId, priceFilter} = req.body;
+        let products;
+        let sortOption;
+
+        if(priceFilter === "0") {
+            sortOption = { name: 1 };
+        } else if(priceFilter === "1") {
+            sortOption = { price: 1 };
+        } else if(priceFilter === "-1") {
+            sortOption = { price: -1 };
+        } else {           
+            sortOption = { name: 1 };
+        }
+
+        products = await Product
+            .find({
+                isActive: true,
+                categories: { $regex: categoryId, $options: 'i' },
+                $or: [
+                    { name: { $regex: search, $options: 'i' } }
+                ]
+            })
+            .sort(sortOption)
+            .populate("categories");
+
+        res.json(products);
+    });
+});
+
 
 module.exports = router;

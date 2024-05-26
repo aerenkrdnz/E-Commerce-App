@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { BlankComponent } from "../components/blank/blank.component";
 import { TableComponent } from "../components/table/table.component";
 import { ValidDirective } from "../directives/valid.directive";
+import { TrCurrencyPipe } from "tr-currency";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ValidDirective } from "../directives/valid.directive";
     RouterModule,
     ValidDirective,
     BlankComponent,
-    TableComponent
+    TableComponent,
+    TrCurrencyPipe
   ],
   exports:[
     CommonModule,
@@ -24,6 +26,7 @@ import { ValidDirective } from "../directives/valid.directive";
     ValidDirective,
     BlankComponent,
     TableComponent,
+    TrCurrencyPipe
   ]
 })
 export class SharedModule { }

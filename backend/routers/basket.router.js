@@ -25,17 +25,19 @@ router.post("/add", async (req, res) => {
     });
 });
 
-router.post("/removeById", async (req, res) => {
-    response(res, async () => {
-        const { _id } = req.body;
+router.post("/removeById", async(req, res)=> {
+    response(res, async()=>{
+        const {_id} = req.body;
 
         let basket = await Basket.findById(_id);
 
-        let product = await Product.findById(productId);
+        let product = await Product.findById(basket.productId);
         product.stock += basket.quantity;
-        await Product.findByIdAndUpdate(productId, product);
+        await Product.findByIdAndUpdate(basket.productId, product);
 
-        await Basket.findByIdAndDelete(_id);
+        await Basket.findByIdAndDelete(_id);   
+        
+        res.json({message: "Ürünü sepetten başarıyla kaldırdık!"});
     });
 });
 

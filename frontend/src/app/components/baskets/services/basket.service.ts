@@ -8,37 +8,37 @@ import { MessageResponseModel } from '../../../common/models/message.response.mo
 })
 export class BasketService {
   count: number = 0;
+
   constructor(
     private _http: GenericHttpService
   ) { }
 
-  getAll(callBack: (res: BasketModel[]) => void) {
+  getAll(callBack: (res: BasketModel[])=> void){
     let userString = localStorage.getItem("user");
     let user = JSON.parse(userString);
-    let model = { userId: user._id };
-    this._http.post<BasketModel[]>("baskets", model, res => callBack(res));
+    let model = {userId: user._id};
+    this._http.post<BasketModel[]>("baskets",model, res=> callBack(res));
   }
 
-  getCount() {
+  getCount(){
     let userString = localStorage.getItem("user");
     let user = JSON.parse(userString);
-    let model = { userId: user._id };
-    this._http.post<any>("baskets/getCount", model, res => this.count = res.count);
+    let model = {userId: user._id};
+    this._http.post<any>("baskets/getCount",model, res=> this.count = res.count);
   }
 
-  add(model: BasketModel, callBack: (res: MessageResponseModel) => void) {
+  add(model:BasketModel, callBack: (res: MessageResponseModel)=> void){
     let userString = localStorage.getItem("user");
     let user = JSON.parse(userString);
     model.userId = user._id;
-    this._http.post<MessageResponseModel>("baskets/add", model, res => {
+    this._http.post<MessageResponseModel>("baskets/add",model, res=>{
       this.getCount();
       callBack(res);
     });
   }
 
-  removeById(model: any, callBack: (res: MessageResponseModel) => void) {
-
-    this._http.post<MessageResponseModel>("baskets/removeById", model, res => {      
+  removeById(model:any, callBack: (res: MessageResponseModel)=> void){    
+    this._http.post<MessageResponseModel>("baskets/removeById",model, res=> {
       this.getCount();
       callBack(res);
     });

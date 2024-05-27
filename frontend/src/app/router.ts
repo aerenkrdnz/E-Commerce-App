@@ -40,6 +40,11 @@ export const routes: Routes = [
                 path: 'categories',
                 loadComponent: () => import('./components/categories/categories.component')
                     .then(m => m.CategoriesComponent)
+            },
+            {
+                path: 'baskets',
+                loadComponent: () => import('./components/baskets/components/baskets/baskets.component')
+                    .then(c => c.BasketsComponent)
             }
         ]
     }

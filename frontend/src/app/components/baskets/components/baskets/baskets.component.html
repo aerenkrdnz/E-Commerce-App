@@ -31,7 +31,7 @@
             <h3 class="alert alert-danger">
                Tutar: {{sum | trCurrency: '₺'}}
             </h3>
-            <button *ngIf="baskets.length > 0" class="btn btn-danger w-100">Ödeme yap</button>
+            <button (click)="createOrder()" *ngIf="baskets.length > 0" class="btn btn-danger w-100">Ödeme yap</button>
         </div>
     </div>
 </app-blank>
